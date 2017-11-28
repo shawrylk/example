@@ -1,0 +1,1 @@
+void binhphuong(int *x);

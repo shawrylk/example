@@ -1,0 +1,23 @@
+IDIR = ../include
+ODIR = obj
+LDIR = ../src
+CC = gcc
+CFLAGS = -I$(IDIR)
+LIBS = -lm
+
+_DEPS = hello.h
+DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+
+_OBJ = main.o hello.o
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+$(ODIR)/%.o: $(SDIR)/main.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+hello: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
+.PHONY: clean
+
+clean:
+	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*.~
